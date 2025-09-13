@@ -5,11 +5,11 @@ Console.WriteLine("Hello, World!");
 
 var mediator = new MediatorImplementation();
 
-var colleague1 = new ColleagueImplementation(mediator);
-var colleague2 = new ColleagueImplementation2(mediator);
+var colleague1 = new ColleagueImplementation();
+var colleague2 = new ColleagueImplementation2();
 
-mediator.SetColleague1(colleague1);
-mediator.SetColleague2(colleague2);
+mediator.RegisterColleague(colleague1);
+mediator.RegisterColleague(colleague2);
 
 colleague1.Send("Hi, from c1");
 colleague2.Send("Hello, from c2");

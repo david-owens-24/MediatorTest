@@ -8,10 +8,10 @@ namespace MediatorTest.Structural
 {
     public class ColleagueImplementation : Colleague
     {
-        public ColleagueImplementation(Mediator mediator) : base(mediator)
-        {
+        //public ColleagueImplementation(Mediator mediator) : base(mediator)
+        //{
 
-        }
+        //}
 
         public override void HandleNotification(string message)
         {

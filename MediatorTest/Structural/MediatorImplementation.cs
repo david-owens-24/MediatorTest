@@ -8,29 +8,31 @@ namespace MediatorTest.Structural
 {
     public class MediatorImplementation : Mediator
     {
-        private Colleague Colleague1;
-        private Colleague Colleague2;
+        private List<Colleague> colleagues = new List<Colleague>();        
 
-        public void SetColleague1(Colleague colleague)
+        public void RegisterColleague(Colleague colleague)
         {
-            Colleague1 = colleague;
-        }
-        public void SetColleague2(Colleague colleague)
-        {
-            Colleague2 = colleague;
+            if (!colleagues.Contains(colleague))
+            {
+                colleagues.Add(colleague);
+                colleague.SetMediator(this);
+            }
         }
 
+        /// <summary>
+        /// Hanldes sending messages to the appropriate colleague(s)
+        /// </summary>
+        /// <param name="message">The message to be sent to each colleague</param>
+        /// <param name="colleague">The original sender of the message</param>
         public override void Send(string message, Colleague colleague)
         {
-            // Determine which colleague should receive the message
-            // (the opposite of the sender)
-            if (colleague == Colleague1)
+            // Send the message to all colleagues except the sender
+            foreach (var col in colleagues)
             {
-                Colleague2.HandleNotification(message);
-            }
-            else
-            {
-                Colleague1.HandleNotification(message);
+                if (col != colleague)
+                {
+                    col.HandleNotification(message);
+                }
             }
         }
     }
