@@ -10,17 +10,25 @@ namespace MediatorTest.Structural
     {
         private List<Colleague> colleagues = new List<Colleague>();        
 
-        public void RegisterColleague(Colleague colleague)
+        //public void RegisterColleague(Colleague colleague)
+        //{
+        //    if (!colleagues.Contains(colleague))
+        //    {
+        //        colleagues.Add(colleague);
+        //        colleague.SetMediator(this);
+        //    }
+        //}
+
+        public T CreateColleague<T>() where T : Colleague, new()
         {
-            if (!colleagues.Contains(colleague))
-            {
-                colleagues.Add(colleague);
-                colleague.SetMediator(this);
-            }
+            var colleague = new T();            
+            colleague.SetMediator(this);
+            this.colleagues.Add(colleague);
+            return colleague;
         }
 
         /// <summary>
-        /// Hanldes sending messages to the appropriate colleague(s)
+        /// Handles sending messages to the appropriate colleague(s)
         /// </summary>
         /// <param name="message">The message to be sent to each colleague</param>
         /// <param name="colleague">The original sender of the message</param>
